@@ -1,0 +1,1055 @@
+{
+  "patcher": {
+    "fileversion": 1,
+    "appversion": {
+      "major": 9,
+      "minor": 0,
+      "revision": 0,
+      "architecture": "x64",
+      "modernui": 1
+    },
+    "classnamespace": "box",
+    "rect": [ 34, 100, 900, 750 ],
+    "bglocked": 0,
+    "openinpresentation": 1,
+    "default_fontsize": 12.0,
+    "default_fontface": 0,
+    "default_fontname": "Arial",
+    "gridonopen": 1,
+    "gridsize": [ 15.0, 15.0 ],
+    "gridsnaponopen": 1,
+    "objectsnaponopen": 1,
+    "statusbarvisible": 2,
+    "toolbarvisible": 1,
+    "lefttoolbarpinned": 0,
+    "toptoolbarpinned": 0,
+    "righttoolbarpinned": 0,
+    "bottomtoolbarpinned": 0,
+    "toolbars_unpinned_last_save": 0,
+    "tallnewobj": 0,
+    "boxanimatetime": 200,
+    "enablehscroll": 1,
+    "enablevscroll": 1,
+    "devicewidth": 0.0,
+    "description": "LOMilkshake - Action-based menu system for Ableton LOM",
+    "tags": "LOM utility",
+    "style": "",
+    "subpatcher_template": "",
+    "assistshowspatchername": 0,
+    "boxes": [
+
+      {
+        "box": {
+          "id": "obj-title",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 15.0, 10.0, 200.0, 24.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 10.0, 5.0, 200.0, 24.0 ],
+          "text": "LOMilkshake",
+          "fontsize": 16.0,
+          "fontface": 1
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-thisdevice",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 15.0, 50.0, 90.0, 22.0 ],
+          "text": "live.thisdevice"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-loadbang-trigger",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "outlettype": [ "bang", "bang" ],
+          "patching_rect": [ 15.0, 80.0, 45.0, 22.0 ],
+          "text": "t b b"
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-dict",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 4,
+          "outlettype": [ "dictionary", "", "", "" ],
+          "patching_rect": [ 15.0, 110.0, 210.0, 22.0 ],
+          "text": "dict lom-targets @import data/lom-targets.json",
+          "saved_object_attributes": {
+            "embed": 0
+          }
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-label-category",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 15.0, 145.0, 65.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 10.0, 35.0, 65.0, 20.0 ],
+          "text": "Category:"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-category-menu",
+          "maxclass": "umenu",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "outlettype": [ "int", "", "" ],
+          "patching_rect": [ 85.0, 145.0, 150.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 75.0, 35.0, 150.0, 22.0 ],
+          "items": [ "Transport", ",", "Song", ",", "Track", ",", "Clip", ",", "Clip Slot", ",", "Device", ",", "Scene", ",", "Master", ",", "Return", ",", "View" ]
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-category-sym",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 85.0, 175.0, 150.0, 22.0 ],
+          "text": "dict.unpack targets:"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-get-cat-targets",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 4,
+          "outlettype": [ "dictionary", "", "", "" ],
+          "patching_rect": [ 85.0, 205.0, 200.0, 22.0 ],
+          "text": "dict.iter"
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-label-target",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 15.0, 240.0, 55.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 10.0, 62.0, 55.0, 20.0 ],
+          "text": "Target:"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-target-menu",
+          "maxclass": "umenu",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "outlettype": [ "int", "", "" ],
+          "patching_rect": [ 85.0, 240.0, 200.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 75.0, 62.0, 200.0, 22.0 ]
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-populate-targets",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 300.0, 175.0, 260.0, 22.0 ],
+          "text": "js patchers/populate-target-menu.js"
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-target-lookup",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 300.0, 240.0, 260.0, 22.0 ],
+          "text": "js patchers/target-lookup.js"
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-route-lookup",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 6,
+          "outlettype": [ "", "", "", "", "", "" ],
+          "patching_rect": [ 300.0, 275.0, 350.0, 22.0 ],
+          "text": "route path prop actions type index"
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-label-indices",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 15.0, 320.0, 55.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 10.0, 92.0, 55.0, 20.0 ],
+          "text": "Indices:"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-label-track",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 80.0, 320.0, 40.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 75.0, 92.0, 40.0, 20.0 ],
+          "text": "Track"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-track-num",
+          "maxclass": "number",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "outlettype": [ "", "bang" ],
+          "patching_rect": [ 80.0, 340.0, 45.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 75.0, 110.0, 45.0, 22.0 ],
+          "minimum": 0
+        }
+      },
+      {
+        "box": {
+          "id": "obj-label-clipslot",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 135.0, 320.0, 35.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 130.0, 92.0, 35.0, 20.0 ],
+          "text": "Clip"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-clipslot-num",
+          "maxclass": "number",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "outlettype": [ "", "bang" ],
+          "patching_rect": [ 135.0, 340.0, 45.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 130.0, 110.0, 45.0, 22.0 ],
+          "minimum": 0
+        }
+      },
+      {
+        "box": {
+          "id": "obj-label-device",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 190.0, 320.0, 45.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 185.0, 92.0, 45.0, 20.0 ],
+          "text": "Device"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-device-num",
+          "maxclass": "number",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "outlettype": [ "", "bang" ],
+          "patching_rect": [ 190.0, 340.0, 45.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 185.0, 110.0, 45.0, 22.0 ],
+          "minimum": 0
+        }
+      },
+      {
+        "box": {
+          "id": "obj-label-param",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 245.0, 320.0, 45.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 240.0, 92.0, 45.0, 20.0 ],
+          "text": "Param"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-param-num",
+          "maxclass": "number",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "outlettype": [ "", "bang" ],
+          "patching_rect": [ 245.0, 340.0, 45.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 240.0, 110.0, 45.0, 22.0 ],
+          "minimum": 0
+        }
+      },
+      {
+        "box": {
+          "id": "obj-label-scene",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 300.0, 320.0, 45.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 295.0, 92.0, 45.0, 20.0 ],
+          "text": "Scene"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-scene-num",
+          "maxclass": "number",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "outlettype": [ "", "bang" ],
+          "patching_rect": [ 300.0, 340.0, 45.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 295.0, 110.0, 45.0, 22.0 ],
+          "minimum": 0
+        }
+      },
+      {
+        "box": {
+          "id": "obj-label-return",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 355.0, 320.0, 45.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 350.0, 92.0, 45.0, 20.0 ],
+          "text": "Return"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-return-num",
+          "maxclass": "number",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "outlettype": [ "", "bang" ],
+          "patching_rect": [ 355.0, 340.0, 45.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 350.0, 110.0, 45.0, 22.0 ],
+          "minimum": 0
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-prepend-track",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 80.0, 370.0, 85.0, 22.0 ],
+          "text": "prepend track"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-prepend-clipslot",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 135.0, 370.0, 95.0, 22.0 ],
+          "text": "prepend clip_slot"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-prepend-device",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 190.0, 370.0, 90.0, 22.0 ],
+          "text": "prepend device"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-prepend-param",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 245.0, 370.0, 105.0, 22.0 ],
+          "text": "prepend parameter"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-prepend-scene",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 300.0, 370.0, 90.0, 22.0 ],
+          "text": "prepend scene"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-prepend-return",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 355.0, 370.0, 90.0, 22.0 ],
+          "text": "prepend return"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-path-builder",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 85.0, 400.0, 300.0, 22.0 ],
+          "text": "js patchers/path-builder.js"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-send-prop",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 670.0, 275.0, 95.0, 22.0 ],
+          "text": "s dispatch-prop"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-prepend-prop-msg",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 670.0, 250.0, 85.0, 22.0 ],
+          "text": "prepend prop"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-recv-prop-get",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 85.0, 460.0, 95.0, 22.0 ],
+          "text": "r dispatch-prop"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-recv-prop-set",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 155.0, 485.0, 95.0, 22.0 ],
+          "text": "r dispatch-prop"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-recv-prop-obs",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 225.0, 510.0, 95.0, 22.0 ],
+          "text": "r dispatch-prop"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-recv-prop-call",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 315.0, 535.0, 95.0, 22.0 ],
+          "text": "r dispatch-prop"
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-btn-get",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "outlettype": [ "", "", "int" ],
+          "patching_rect": [ 85.0, 430.0, 60.0, 28.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 10.0, 145.0, 60.0, 28.0 ],
+          "text": "GET",
+          "texton": "GET",
+          "fontface": 1
+        }
+      },
+      {
+        "box": {
+          "id": "obj-btn-set",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "outlettype": [ "", "", "int" ],
+          "patching_rect": [ 155.0, 430.0, 60.0, 28.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 80.0, 145.0, 60.0, 28.0 ],
+          "text": "SET",
+          "texton": "SET",
+          "fontface": 1
+        }
+      },
+      {
+        "box": {
+          "id": "obj-btn-observe",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "outlettype": [ "", "", "int" ],
+          "patching_rect": [ 225.0, 430.0, 80.0, 28.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 150.0, 145.0, 80.0, 28.0 ],
+          "text": "OBSERVE",
+          "texton": "OBSERVE",
+          "fontface": 1
+        }
+      },
+      {
+        "box": {
+          "id": "obj-btn-call",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "outlettype": [ "", "", "int" ],
+          "patching_rect": [ 315.0, 430.0, 60.0, 28.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 240.0, 145.0, 60.0, 28.0 ],
+          "text": "CALL",
+          "texton": "CALL",
+          "fontface": 1
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-store-prop",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 500.0, 275.0, 110.0, 22.0 ],
+          "text": "value current-prop"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-store-path",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 500.0, 390.0, 110.0, 22.0 ],
+          "text": "value current-path"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-store-actions",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 500.0, 305.0, 125.0, 22.0 ],
+          "text": "value current-actions"
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-get-trigger",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 85.0, 475.0, 250.0, 22.0 ],
+          "text": "js patchers/action-dispatch.js get"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-set-trigger",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 155.0, 500.0, 250.0, 22.0 ],
+          "text": "js patchers/action-dispatch.js set"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-observe-trigger",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 225.0, 525.0, 250.0, 22.0 ],
+          "text": "js patchers/action-dispatch.js observe"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-call-trigger",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "outlettype": [ "" ],
+          "patching_rect": [ 315.0, 550.0, 250.0, 22.0 ],
+          "text": "js patchers/action-dispatch.js call"
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-engine",
+          "maxclass": "bpatcher",
+          "numinlets": 3,
+          "numoutlets": 3,
+          "outlettype": [ "", "", "" ],
+          "patching_rect": [ 85.0, 590.0, 400.0, 60.0 ],
+          "name": "patchers/lom-engine.maxpat",
+          "bgmode": 0,
+          "border": 1,
+          "clickthrough": 0,
+          "enablehscroll": 0,
+          "enablevscroll": 0,
+          "lockeddragscroll": 0,
+          "offset": [ 0.0, 0.0 ],
+          "viewvisibility": 0
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-label-value",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 15.0, 665.0, 50.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 10.0, 182.0, 50.0, 20.0 ],
+          "text": "Value:"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-value-display",
+          "maxclass": "number~",
+          "numinlets": 2,
+          "numoutlets": 2,
+          "outlettype": [ "signal", "float" ],
+          "patching_rect": [ 85.0, 665.0, 100.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 60.0, 180.0, 100.0, 22.0 ],
+          "sig": 0.0,
+          "mode": 2
+        }
+      },
+      {
+        "box": {
+          "id": "obj-value-text",
+          "maxclass": "textedit",
+          "numinlets": 1,
+          "numoutlets": 4,
+          "outlettype": [ "", "int", "", "" ],
+          "patching_rect": [ 200.0, 665.0, 250.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 170.0, 180.0, 230.0, 22.0 ],
+          "readonly": 0
+        }
+      },
+      {
+        "box": {
+          "id": "obj-label-status",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 15.0, 700.0, 50.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 10.0, 210.0, 50.0, 20.0 ],
+          "text": "Status:"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-status-display",
+          "maxclass": "textedit",
+          "numinlets": 1,
+          "numoutlets": 4,
+          "outlettype": [ "", "int", "", "" ],
+          "patching_rect": [ 85.0, 700.0, 365.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 60.0, 210.0, 340.0, 22.0 ],
+          "readonly": 1,
+          "bgcolor": [ 0.92, 0.92, 0.92, 1.0 ]
+        }
+      },
+
+      {
+        "box": {
+          "id": "obj-label-path-display",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [ 500.0, 590.0, 40.0, 20.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 10.0, 240.0, 40.0, 20.0 ],
+          "text": "Path:"
+        }
+      },
+      {
+        "box": {
+          "id": "obj-path-display",
+          "maxclass": "textedit",
+          "numinlets": 1,
+          "numoutlets": 4,
+          "outlettype": [ "", "int", "", "" ],
+          "patching_rect": [ 540.0, 590.0, 300.0, 22.0 ],
+          "presentation": 1,
+          "presentation_rect": [ 50.0, 240.0, 350.0, 22.0 ],
+          "readonly": 1,
+          "bgcolor": [ 0.92, 0.92, 0.92, 1.0 ]
+        }
+      }
+    ],
+    "lines": [
+
+      {
+        "patchline": {
+          "source": [ "obj-thisdevice", 0 ],
+          "destination": [ "obj-loadbang-trigger", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-loadbang-trigger", 0 ],
+          "destination": [ "obj-dict", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-loadbang-trigger", 1 ],
+          "destination": [ "obj-category-menu", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-category-menu", 1 ],
+          "destination": [ "obj-populate-targets", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-populate-targets", 0 ],
+          "destination": [ "obj-target-menu", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-target-menu", 0 ],
+          "destination": [ "obj-target-lookup", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-target-lookup", 0 ],
+          "destination": [ "obj-route-lookup", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-route-lookup", 0 ],
+          "destination": [ "obj-path-builder", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-route-lookup", 1 ],
+          "destination": [ "obj-store-prop", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-route-lookup", 2 ],
+          "destination": [ "obj-store-actions", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-path-builder", 0 ],
+          "destination": [ "obj-store-path", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-btn-get", 0 ],
+          "destination": [ "obj-get-trigger", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-btn-set", 0 ],
+          "destination": [ "obj-set-trigger", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-btn-observe", 0 ],
+          "destination": [ "obj-observe-trigger", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-btn-call", 0 ],
+          "destination": [ "obj-call-trigger", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-get-trigger", 0 ],
+          "destination": [ "obj-engine", 1 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-set-trigger", 0 ],
+          "destination": [ "obj-engine", 1 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-observe-trigger", 0 ],
+          "destination": [ "obj-engine", 1 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-call-trigger", 0 ],
+          "destination": [ "obj-engine", 1 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-path-builder", 0 ],
+          "destination": [ "obj-engine", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-value-display", 1 ],
+          "destination": [ "obj-engine", 2 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-engine", 0 ],
+          "destination": [ "obj-value-display", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-engine", 0 ],
+          "destination": [ "obj-value-text", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-engine", 1 ],
+          "destination": [ "obj-value-display", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-engine", 1 ],
+          "destination": [ "obj-value-text", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-engine", 2 ],
+          "destination": [ "obj-path-display", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-category-menu", 1 ],
+          "destination": [ "obj-target-lookup", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-track-num", 0 ],
+          "destination": [ "obj-prepend-track", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-clipslot-num", 0 ],
+          "destination": [ "obj-prepend-clipslot", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-device-num", 0 ],
+          "destination": [ "obj-prepend-device", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-param-num", 0 ],
+          "destination": [ "obj-prepend-param", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-scene-num", 0 ],
+          "destination": [ "obj-prepend-scene", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-return-num", 0 ],
+          "destination": [ "obj-prepend-return", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-prepend-track", 0 ],
+          "destination": [ "obj-path-builder", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-prepend-clipslot", 0 ],
+          "destination": [ "obj-path-builder", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-prepend-device", 0 ],
+          "destination": [ "obj-path-builder", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-prepend-param", 0 ],
+          "destination": [ "obj-path-builder", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-prepend-scene", 0 ],
+          "destination": [ "obj-path-builder", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-prepend-return", 0 ],
+          "destination": [ "obj-path-builder", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-route-lookup", 1 ],
+          "destination": [ "obj-prepend-prop-msg", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-prepend-prop-msg", 0 ],
+          "destination": [ "obj-send-prop", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-recv-prop-get", 0 ],
+          "destination": [ "obj-get-trigger", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-recv-prop-set", 0 ],
+          "destination": [ "obj-set-trigger", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-recv-prop-obs", 0 ],
+          "destination": [ "obj-observe-trigger", 0 ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [ "obj-recv-prop-call", 0 ],
+          "destination": [ "obj-call-trigger", 0 ]
+        }
+      },
+
+      {
+        "patchline": {
+          "source": [ "obj-path-builder", 0 ],
+          "destination": [ "obj-path-display", 0 ]
+        }
+      }
+    ]
+  }
+}
